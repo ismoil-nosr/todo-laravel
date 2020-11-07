@@ -21,6 +21,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "vue-pluralize": "0.0.2"
+        "vue-pluralize": "0.0.2",
+        "vue-toastification": "^1.7.8"
     }
 }

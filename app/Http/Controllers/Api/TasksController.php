@@ -76,7 +76,7 @@ class TasksController extends Controller
         Task::where('owner_id', auth('web')->user()->id)
             ->whereIn('id', $request->ids)->delete();
 
-        return response()->json('all deleted!');
+        return response()->json('cleared!');
     }
 
     /**

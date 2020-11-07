@@ -39,6 +39,9 @@
 </template>
 
 <script>
+
+// May God forgive me for garbage code below. Amen!
+
 // visibility filters
 var filters = {
     all: function (todos) {
@@ -132,6 +135,9 @@ export default {
             axios.post('/api/tasks', data).then(response => {
                 this.newTodo = "";
                 this.todos.push(response.data);
+                this.showSuccessMsg('Item added!');
+            }).catch(error => {
+                this.showErrorMsg(error.response.data.errors.title[0]);
             });
         },
 
@@ -140,7 +146,7 @@ export default {
             var completed = !this.todos[index].completed ? 1 : 0;
 
             axios.patch('/api/tasks/' + id, {completed: completed}).then(response => {
-                console.log(response.data);
+                this.showSuccessMsg(response.data);
             });
         },
 
@@ -148,7 +154,7 @@ export default {
             this.todos.splice(this.todos.indexOf(todo), 1);
 
             axios.delete('/api/tasks/' + todo.id).then(response => {
-                console.log(response);
+                this.showSuccessMsg(response.data);
             });
         },
 
@@ -168,7 +174,7 @@ export default {
                 this.removeTodo(todo);
             } else {
                 axios.patch('/api/tasks/' + todo.id, {title: todo.title}).then(response => {
-                    console.log('123123');
+                    this.showSuccessMsg(response.data);
                 });
             }
         },
@@ -180,7 +186,7 @@ export default {
 
         bulkComplete(status) {
             axios.post('/api/tasks/bulkComplete', {completed: status ? 1 : 0}).then(response => {
-                console.log(response);
+                this.showSuccessMsg(response.data);
             });
         },
 
@@ -188,7 +194,7 @@ export default {
             var data = {ids: filters.completed(this.todos).map(a => a.id)};
 
             axios.post('/api/tasks/bulkDelete', data).then(response => {
-                console.log(response);
+                this.showSuccessMsg(response.data);
             });
 
             this.todos = filters.active(this.todos);
@@ -196,6 +202,40 @@ export default {
 
         filterTasks(filter) {
             this.visibility = filter;
+        },
+
+        showSuccessMsg(msg) {
+            this.$toast.success(msg, {
+                position: "top-right",
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: "button",
+                icon: true,
+                rtl: false
+            }); 
+        },
+
+        showErrorMsg(msg) {
+            this.$toast.error(msg, {
+                position: "top-right",
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: "button",
+                icon: true,
+                rtl: false
+            }); 
         }
     },
 

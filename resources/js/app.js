@@ -3,10 +3,18 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 import './bootstrap';
 
 window.Vue = require('vue');
+
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+const options = {
+    // You can set your default options here
+};
+
+Vue.use(Toast, options);
 
 /**
  * The following block of code may be used to automatically register your
