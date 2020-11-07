@@ -44,7 +44,7 @@ class TasksController extends Controller
     {
         $task->update($request->validated());
 
-        return response()->json('success');
+        return response()->json('updated!');
     }
 
     /**
@@ -57,7 +57,7 @@ class TasksController extends Controller
     {
         if ($task) {
             $task->delete();
-            return response()->json('success');
+            return response()->json('deleted!');
         } else {
             return response()->json('No matched records!');
         }
@@ -76,7 +76,7 @@ class TasksController extends Controller
         Task::where('owner_id', auth('web')->user()->id)
             ->whereIn('id', $request->ids)->delete();
 
-        return response()->json('ss');
+        return response()->json('all deleted!');
     }
 
     /**
@@ -90,6 +90,6 @@ class TasksController extends Controller
         Task::where('owner_id', auth('web')->user()->id)
             ->update(['completed' => $request->completed]);
 
-        return response()->json('ss');
+        return response()->json('all updated!');
     }
 }

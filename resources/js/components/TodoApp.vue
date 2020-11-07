@@ -136,7 +136,10 @@ export default {
         },
 
         completeTask(index) {
-            axios.patch('/api/tasks/' + this.todos[index].id, this.todos[index]).then(response => {
+            var id = this.todos[index].id;
+            var completed = !this.todos[index].completed ? 1 : 0;
+
+            axios.patch('/api/tasks/' + id, {completed: completed}).then(response => {
                 console.log(response.data);
             });
         },
@@ -160,11 +163,12 @@ export default {
             }
             this.editedTodo = null;
             todo.title = todo.title.trim();
+
             if (!todo.title) {
                 this.removeTodo(todo);
             } else {
-                axios.patch('/api/tasks/' + todo.id, todo).then(response => {
-                    console.log(response.data);
+                axios.patch('/api/tasks/' + todo.id, {title: todo.title}).then(response => {
+                    console.log('123123');
                 });
             }
         },

@@ -2042,7 +2042,11 @@ var filters = {
       });
     },
     completeTask: function completeTask(index) {
-      axios.patch('/api/tasks/' + this.todos[index].id, this.todos[index]).then(function (response) {
+      var id = this.todos[index].id;
+      var completed = !this.todos[index].completed ? 1 : 0;
+      axios.patch('/api/tasks/' + id, {
+        completed: completed
+      }).then(function (response) {
         console.log(response.data);
       });
     },
@@ -2067,8 +2071,10 @@ var filters = {
       if (!todo.title) {
         this.removeTodo(todo);
       } else {
-        axios.patch('/api/tasks/' + todo.id, todo).then(function (response) {
-          console.log(response.data);
+        axios.patch('/api/tasks/' + todo.id, {
+          title: todo.title
+        }).then(function (response) {
+          console.log('123123');
         });
       }
     },
@@ -32433,8 +32439,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OpenServer_MAIN\domains\project1.laravel\todo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OpenServer_MAIN\domains\project1.laravel\todo\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\openserver_main\domains\project1.laravel\todo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\openserver_main\domains\project1.laravel\todo\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

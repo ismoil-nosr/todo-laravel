@@ -24,15 +24,8 @@ class UpdateTaskRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'min:3|max:50',
             'completed' => 'boolean'
         ];
-    }
-    
-    public function validated()
-    {
-        $v = parent::validated();
-        $v['completed'] = $v['completed'] == 'true' ? 1 : 0;
-        
-        return $v;
     }
 }
