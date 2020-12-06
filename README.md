@@ -43,14 +43,6 @@ docker-compose up -d
 - Supervisord: latest
 - Composer: latest
 
-## Troubleshootings
-**Login/Register not working**: If site has SSL enabled, put the code below into `boot` section of `app/Providers/AppServiceProvider.php`
-```php
-if (env('APP_ENV') === 'production') {
-    \Illuminate\Support\Facades\URL::forceScheme('https');
-}
-```
-
 ## Useful links
 - [Laravel Framework](https://github.com/laravel/framework "Laravel Framework")
 - [Laravel Caprover boilerplate](https://github.com/jackbrycesmith/laravel-caprover-template "Laravel Caprover boilerplate")
