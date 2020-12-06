@@ -81,8 +81,6 @@ ARG DB_PASSWORD=${DB_PASSWORD}
 # Start app
 EXPOSE 80 443
 
-USER www-data
-
 COPY ./.deploy/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
